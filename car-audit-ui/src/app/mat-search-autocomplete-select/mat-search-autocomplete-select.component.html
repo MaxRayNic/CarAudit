@@ -1,0 +1,127 @@
+<body>
+
+<section>
+  <h3>Choose Operation:</h3>
+  <mat-button-toggle-group [(ngModel)]="utility"  aria-label="Favorite Color">
+    <mat-button-toggle value="Mileage">Calc Price Using Mileage</mat-button-toggle>
+    <mat-button-toggle value="Average">Get Average</mat-button-toggle>
+
+  </mat-button-toggle-group>
+
+</section>
+<br>
+<br>
+
+<section>
+
+<h4>Calculate {{utility}}  </h4>
+
+</section>
+<form class="car-search-form">
+  <mat-form-field class="make-search">
+    <mat-label>Make</mat-label>
+    <input type="text" required
+           placeholder="Enter Make"
+           aria-label="Make"
+           matInput
+           [formControl]="makeControl"
+           [matAutocomplete]="auto"
+
+           (change)="clearResults()"
+           >
+    <mat-autocomplete  #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptionsMake | async" [value]="option" (click)="intiateModel($event, item)" >
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+
+
+  </mat-form-field>
+  <span disabled="!makeControl.value">
+  <mat-form-field class="model-search"  >
+    <mat-label>Model</mat-label>
+    <input type="text" required
+           placeholder="Enter Model"
+           aria-label="Model"
+           matInput
+           [formControl]="modelControl"
+           [matAutocomplete]="autoModel"
+
+           [disabled]="!makeControl.value"
+           (change)="clearResults()"
+           >
+
+    <mat-autocomplete autoActiveFirstOption #autoModel="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptionsModel | async" [value]="option" >
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+
+
+  </mat-form-field>
+</span>
+  <mat-form-field class="model-search">
+    <mat-label>Year</mat-label>
+    <input type="text" required
+           placeholder="Enter Year"
+           aria-label="Year"
+           matInput
+           [formControl]="yearControl"
+           [matAutocomplete]="autoYear"
+           (change)="clearResults()"
+           >
+    <mat-autocomplete #autoYear="matAutocomplete" >
+      <mat-option *ngFor="let option of filteredOptionsYear | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+
+  <span [hidden]="!(utility==utilVal2)">
+  <mat-form-field class="model-search">
+    <mat-label>Desired Mileage</mat-label>
+    <input type="text" required
+           placeholder="Enter Desired Mileage"
+           aria-label="Desired Mileage"
+           matInput
+           [formControl]="mileageControl"
+           (change)="clearResults()"
+           >
+
+  </mat-form-field>
+  </span>
+</form>
+
+
+<button type="submit" [hidden]="!(yearControl.value&&makeControl.value&&modelControl.value&&utility!=utilVal2)" (click)="fetchAverage()">Calculate Average</button>
+<button type="submit" [hidden]="!(yearControl.value&&makeControl.value&&modelControl.value&&utility==utilVal2&&mileageControl.value)" (click)="fetchPrice()">Calculate Price</button>
+
+
+<p [hidden]="!(yearControl.value&&makeControl.value&&modelControl.value&&utility==utilVal2&&mileageControl.value&&showResult)">The expected price for ({{makeControl.value}} {{modelControl.value}} {{yearControl.value}} ) is {{predictedResult}}</p>
+
+<section [hidden]="!(yearControl.value&&makeControl.value&&modelControl.value&&averageResult&&utility!=utilVal2&&showResult)" >
+
+<table  style="width: 100%;">
+  <thead>
+      <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Average Price</th>
+        <th>Average Mileage</th>
+        <th>Year</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of averageResult">
+      <td>{{ row.make }}</td>
+      <td>{{ row.model }}</td>
+      <td>$ {{ row.average_price }}</td>
+      <td>{{ row.average_mileage }} miles</td>
+      <td>{{ row.year }}</td>
+    </tr>
+  </tbody>
+</table>
+
+</section>
+</body>
