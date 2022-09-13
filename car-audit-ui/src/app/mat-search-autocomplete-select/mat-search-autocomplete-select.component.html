@@ -52,7 +52,7 @@
            >
 
     <mat-autocomplete autoActiveFirstOption #autoModel="matAutocomplete">
-      <mat-option *ngFor="let option of filteredOptionsModel | async" [value]="option" >
+      <mat-option *ngFor="let option of filteredOptionsModel | async" [value]="option" (click)="intiateYear($event, item)" >
         {{option}}
       </mat-option>
     </mat-autocomplete>

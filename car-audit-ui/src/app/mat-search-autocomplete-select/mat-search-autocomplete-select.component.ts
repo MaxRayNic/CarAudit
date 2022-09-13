@@ -84,7 +84,9 @@ export class MatSearchAutocompleteSelectComponent implements OnInit , AfterViewI
     this.filteredOptionsYear = this.yearControl.valueChanges
     .pipe(
       startWith(''),
-      map(value => this._filter_year(value))
+      switchMap(val => {
+        return this._filter_make(val);
+      })
     );
 
 
@@ -153,14 +155,24 @@ export class MatSearchAutocompleteSelectComponent implements OnInit , AfterViewI
       })));
   }
 
-  private _filter_year(value: string): string[] {
+  private _filter_year(value: string) {
     const filterValue = value;
 
+    const modelEndpoint = 'year_autocomplete';
+    const params = {
+      model : this.modelControl.value ,
+      make : this.makeControl.value,
+      year_prefix : value
+    };
+    const url = `${environment.apiUrl}${modelEndpoint}`;
+
+    return this.httpClientService.get_service(url, params).pipe(
+      map(response => response.filter(option => {
+        return option;
+      })));
 
 
-    return this.options.filter(
-      option => option.toLowerCase().indexOf(filterValue) === 0
-    );
+
   }
   intiateModel(event: any, item: any): void{
     this.filteredOptionsModel = this.modelControl.valueChanges
@@ -168,6 +180,16 @@ export class MatSearchAutocompleteSelectComponent implements OnInit , AfterViewI
       startWith(''),
       switchMap(val => {
         return this._filter_model(val);
+      })
+    );
+  }
+
+  intiateYear(event: any, item: any): void{
+    this.filteredOptionsYear = this.yearControl.valueChanges
+    .pipe(
+      startWith(''),
+      switchMap(val => {
+        return this._filter_year(val);
       })
     );
   }

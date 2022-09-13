@@ -52,7 +52,7 @@ make_parser.add_argument(
     "make_prefix", type=str, required=True, help="make(brand) prefix for make search", location='args'
 )
 make_parser.add_argument(
-    "suggestion_limit", type=int, required=False, default=5, help="maximum no of suggestion for make",location='args'
+    "suggestion_limit", type=int, required=False, default=5, help="maximum no of suggestion for make", location='args'
 )
 
 make_model_parser = api.parser()
@@ -65,7 +65,24 @@ make_model_parser.add_argument(
 )
 
 make_model_parser.add_argument(
-    "suggestion_limit", type=int, required=False, default=5, help="maximum no of suggestion for model",location='args'
+    "suggestion_limit", type=int, required=False, default=5, help="maximum no of suggestion for model", location='args'
+)
+
+make_model_year_parser = api.parser()
+
+make_model_year_parser.add_argument(
+    "make", type=str, required=True, help="make of the car", location='args',
+)
+make_model_year_parser.add_argument(
+    "model", type=str, required=True, help="model(brand) prefix for autocomplete model search", location='args',
+)
+
+make_model_year_parser.add_argument(
+    "year_prefix", type=str, required=True, help="year prefix for autocomplete model search", location='args',
+)
+
+make_model_year_parser.add_argument(
+    "suggestion_limit", type=int, required=False, default=1000, help="maximum no of suggestion for model", location='args'
 )
 
 from api_initiator.routes import *

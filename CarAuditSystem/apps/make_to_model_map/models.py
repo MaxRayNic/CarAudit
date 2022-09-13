@@ -16,7 +16,7 @@ class MakeToModelsMap(Base):
         self.model_list = model_list
 
     def __repr__(self):
-        return '<User %r>' % self.make
+        return '<MakeToModelsMap %r>' % self.make
 
     def to_dict(self):
         return {

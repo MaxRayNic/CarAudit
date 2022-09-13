@@ -65,7 +65,7 @@ class CarDetails(Base):
         self.listing_status = listing_status
 
     def __repr__(self):
-        return '<User %r>' % (self.id)
+        return '<CarDetails %r>' % (self.id)
 
     def to_dict(self):
         return {

@@ -1,11 +1,5 @@
-import numpy as np
-from sqlalchemy import func, inspect
-
-from apps.car_details.models import CarDetails
 from apps.make_to_model_map.models import MakeToModelsMap
-from database import db_session, engine
-from sklearn.linear_model import LinearRegression
-
+from database import db_session
 
 
 class AutoCompleteModelQuery:
@@ -41,8 +35,3 @@ class AutoCompleteMakeQuery:
 
         return make_suggestions
 
-    @staticmethod
-    def object_as_dict(obj):
-        return {
-            'model': obj.model,
-        }
