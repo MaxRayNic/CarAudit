@@ -1,0 +1,264 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "car-audit-ui": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/car-audit-ui",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "local": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "car-audit-ui:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "car-audit-ui:build:production"
+            },
+            "local": {
+              "browserTarget": "car-audit-ui:build:local"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "car-audit-ui:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "car-audit-ui:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "car-audit-ui:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "autocomplete-auto-active-first-option": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/autocomplete-auto-active-first-option",
+      "sourceRoot": "projects/autocomplete-auto-active-first-option/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/autocomplete-auto-active-first-option",
+            "index": "projects/autocomplete-auto-active-first-option/src/index.html",
+            "main": "projects/autocomplete-auto-active-first-option/src/main.ts",
+            "polyfills": "projects/autocomplete-auto-active-first-option/src/polyfills.ts",
+            "tsConfig": "projects/autocomplete-auto-active-first-option/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/autocomplete-auto-active-first-option/src/favicon.ico",
+              "projects/autocomplete-auto-active-first-option/src/assets"
+            ],
+            "styles": [
+              "projects/autocomplete-auto-active-first-option/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/autocomplete-auto-active-first-option/src/environments/environment.ts",
+                  "with": "projects/autocomplete-auto-active-first-option/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "autocomplete-auto-active-first-option:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "autocomplete-auto-active-first-option:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "autocomplete-auto-active-first-option:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/autocomplete-auto-active-first-option/src/test.ts",
+            "polyfills": "projects/autocomplete-auto-active-first-option/src/polyfills.ts",
+            "tsConfig": "projects/autocomplete-auto-active-first-option/tsconfig.spec.json",
+            "karmaConfig": "projects/autocomplete-auto-active-first-option/karma.conf.js",
+            "assets": [
+              "projects/autocomplete-auto-active-first-option/src/favicon.ico",
+              "projects/autocomplete-auto-active-first-option/src/assets"
+            ],
+            "styles": [
+              "projects/autocomplete-auto-active-first-option/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/autocomplete-auto-active-first-option/tsconfig.app.json",
+              "projects/autocomplete-auto-active-first-option/tsconfig.spec.json",
+              "projects/autocomplete-auto-active-first-option/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/autocomplete-auto-active-first-option/e2e/protractor.conf.js",
+            "devServerTarget": "autocomplete-auto-active-first-option:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "autocomplete-auto-active-first-option:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "car-audit-ui"
+}
